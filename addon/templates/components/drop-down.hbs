@@ -1,0 +1,11 @@
+<input name="hiddenSelection" type="hidden" {{action 'updateSelection' on='change'}} disabled={{disabled}}>
+<i class="dropdown icon"></i>
+<div class="default text">{{prompt}}</div>
+<div class="menu">
+  {{#unless multiple}}
+    {{#if prompt}}
+      <div class="default text item" data-value=-1>{{prompt}}</div>
+    {{/if}}
+  {{/unless}}
+  {{yield}}
+</div>
