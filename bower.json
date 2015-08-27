@@ -12,9 +12,6 @@
     "jquery": "^1.11.3",
     "loader.js": "ember-cli/loader.js#3.2.1",
     "qunit": "~1.18.0",
-    "semantic-ui-transition": "~2.0.8",
-    "semantic-ui-dropdown": "~2.0.8",
-    "semantic-ui-label": "~2.0.8",
-    "semantic-ui-icon": "~2.0.8"
+    "semantic-ui": "~2.0.7"
   }
 }
