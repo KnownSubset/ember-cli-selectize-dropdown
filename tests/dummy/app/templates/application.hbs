@@ -1,6 +1,7 @@
 <h2 id="title">Welcome to Ember</h2>
 
 {{#drop-down prompt="Select your favorite animal" model=animals}}
+{{#each animals as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
 {{/drop-down}}
 
 <select class="ui search dropdown normal">

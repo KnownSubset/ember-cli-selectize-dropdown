@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     this._super(...arguments);
-    this.configure();
+    Ember.run.scheduleOnce('afterRender', this, this.configure);
   },
 
   actions: {
@@ -39,7 +39,8 @@ export default Ember.Component.extend({
         this.$().dropdown('clear');
         return;
       }
-      let answer = this.get('model').objectsAt(selectedElements);
+      const model = Ember.A(this.get('model'));
+      let answer = model.objectsAt(selectedElements);
       if (!this.get('multiple')) {
         answer = answer[0];
       }

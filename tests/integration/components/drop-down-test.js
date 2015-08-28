@@ -30,15 +30,15 @@ test('it accepts a prompt', function(assert) {
   this.render(hbs`{{drop-down prompt="promptText"}}`);
 
   assert.equal(this.$('.ui.dropdown .default.text.item').text().trim(), "promptText");
-  assert.equal(this.$('.ui.dropdown .default.text.prompt').text().trim(), "promptText");
+  assert.equal(this.$('.ui.dropdown .default.text.dropdown-prompt').text().trim(), "promptText");
 
   this.render(hbs`{{#drop-down prompt="promptText"}}{{/drop-down}}`);
 
   assert.equal(this.$('.ui.dropdown .default.text.item').text().trim(), "promptText");
-  assert.equal(this.$('.ui.dropdown .default.text.prompt').text().trim(), "promptText");
+  assert.equal(this.$('.ui.dropdown .default.text.dropdown-prompt').text().trim(), "promptText");
 });
 
-test('it has a selected property', function(assert) {
+test('it can set the selected item', function(assert) {
   assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
@@ -48,9 +48,9 @@ test('it has a selected property', function(assert) {
   // Template block usage:
   this.render(hbs`
     {{#drop-down model=model selected='cow'}}
-      {{#each model as |animal|}} <div class='text item'> {{animal}} </div> {{/each}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
     {{/drop-down}}
   `);
 
-  assert.equal(this.$().text().trim(), 'cow');
+  assert.equal(this.$('.dropdown-prompt.text').text().trim(), 'cow');
 });
