@@ -154,3 +154,24 @@ test('it can handle an invalid selected item that is not in the model', function
 
   assert.equal(this.$('.dropdown-prompt.text').text().trim(), '--Select One--');
 });
+
+test('it can handle an un-initalized array for syncing the selected elements', function(assert) {
+  assert.expect(1);
+
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.set('model', ['dog', 'cat', 'cow']);
+
+  this.render(hbs`
+    {{#drop-down model=model multiple=true selected=selectedElements}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+    {{/drop-down}}
+  `);
+  Ember.run(() => {
+    this.$('.ui.dropdown input.search').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(2)').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(1)').trigger('click');
+  });
+
+    assert.deepEqual(this.get('selectedElements'), ['cow', 'cat']);
+});
