@@ -4,6 +4,11 @@
 {{#each animals as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
 {{/drop-down}}
 
+{{#drop-down prompt="Select your favorite animal" model=animals multiple=true}}
+{{#each animals as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+{{/drop-down}}
+
+
 <select class="ui search dropdown normal">
   <option value="">State</option>
   <option value="AL">Alabama</option>

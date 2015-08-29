@@ -1,5 +1,6 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 moduleForComponent('drop-down', 'Integration | Component | drop down', {
   integration: true
@@ -15,7 +16,6 @@ test('it renders the inner content through yielding', function(assert) {
   const prompt = 'my prompt for this test';
   this.set('someText', prompt);
 
-  // Template block usage:
   this.render(hbs`
     {{#drop-down}}
       <div class='test item'>{{someText}}</div>
@@ -56,11 +56,8 @@ test('the prompts can be different per instance', function(assert) {
 test('it can set the selected item', function(assert) {
   assert.expect(1);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', ['dog', 'cat', 'cow']);
 
-  // Template block usage:
   this.render(hbs`
     {{#drop-down model=model selected='cow'}}
       {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
@@ -68,6 +65,77 @@ test('it can set the selected item', function(assert) {
   `);
 
   assert.equal(this.$('.dropdown-prompt.text').text().trim(), 'cow');
+});
+
+test('it can handle an invalid selected item that is not in the model', function(assert) {
+  assert.expect(1);
+
+  this.set('model', ['dog', 'cat', 'cow']);
+
+  this.render(hbs`
+    {{#drop-down model=model selected='bird'}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+    {{/drop-down}}
+  `);
+
+  assert.equal(this.$('.dropdown-prompt.text').text().trim(), '--Select One--');
+});
+
+test('it can set the selected item', function(assert) {
+  assert.expect(1);
+
+  this.set('model', ['dog', 'cat', 'cow']);
+
+  this.render(hbs`
+    {{#drop-down model=model}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+    {{/drop-down}}
+  `);
+  Ember.run(() => {
+    this.$('.ui.dropdown').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(3)').trigger('click');
+  });
+
+  assert.equal(this.$('.dropdown-prompt.text').text().trim(), 'cow');
+});
+
+test('it supports multiple selection', function(assert) {
+  assert.expect(1);
+
+  this.set('model', ['dog', 'cat', 'cow']);
+
+  this.render(hbs`
+    {{#drop-down model=model multiple=true}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+    {{/drop-down}}
+  `);
+  Ember.run(() => {
+    this.$('.ui.dropdown input.search').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(2)').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(1)').trigger('click');
+  });
+
+  assert.equal(this.$('.ui.label').text().trim(), 'cowcat');
+});
+
+test('it tells you what elements are selected', function(assert) {
+  assert.expect(1);
+
+  this.set('selectedElements', []);
+  this.set('model', ['dog', 'cat', 'cow']);
+
+  this.render(hbs`
+    {{#drop-down model=model multiple=true selected=selectedElements}}
+      {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
+    {{/drop-down}}
+  `);
+  Ember.run(() => {
+    this.$('.ui.dropdown input.search').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(2)').trigger('click');
+    this.$('.ui.dropdown div.text.item:eq(1)').trigger('click');
+  });
+
+  assert.deepEqual(this.get('selectedElements'), ['cow', 'cat']);
 });
 
 test('it can handle an invalid selected item that is not in the model', function(assert) {
