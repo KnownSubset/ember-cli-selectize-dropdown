@@ -55,7 +55,6 @@ test('the prompts can be different per instance', function(assert) {
 
 test('it can set the selected item', function(assert) {
   assert.expect(1);
-
   this.set('model', ['dog', 'cat', 'cow']);
 
   this.render(hbs`
@@ -69,7 +68,6 @@ test('it can set the selected item', function(assert) {
 
 test('it can handle an invalid selected item that is not in the model', function(assert) {
   assert.expect(1);
-
   this.set('model', ['dog', 'cat', 'cow']);
 
   this.render(hbs`
@@ -83,7 +81,6 @@ test('it can handle an invalid selected item that is not in the model', function
 
 test('it can set the selected item', function(assert) {
   assert.expect(1);
-
   this.set('model', ['dog', 'cat', 'cow']);
 
   this.render(hbs`
@@ -101,7 +98,6 @@ test('it can set the selected item', function(assert) {
 
 test('it supports multiple selection', function(assert) {
   assert.expect(1);
-
   this.set('model', ['dog', 'cat', 'cow']);
 
   this.render(hbs`
@@ -120,7 +116,6 @@ test('it supports multiple selection', function(assert) {
 
 test('it tells you what elements are selected', function(assert) {
   assert.expect(1);
-
   this.set('selectedElements', []);
   this.set('model', ['dog', 'cat', 'cow']);
 
@@ -140,12 +135,8 @@ test('it tells you what elements are selected', function(assert) {
 
 test('it can handle an invalid selected item that is not in the model', function(assert) {
   assert.expect(1);
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', ['dog', 'cat', 'cow']);
 
-  // Template block usage:
   this.render(hbs`
     {{#drop-down model=model selected='bird'}}
       {{#each model as |animal index|}} <div class='text item' data-value={{index}}> {{animal}} </div> {{/each}}
@@ -157,9 +148,6 @@ test('it can handle an invalid selected item that is not in the model', function
 
 test('it can handle an un-initalized array for syncing the selected elements', function(assert) {
   assert.expect(1);
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
   this.set('model', ['dog', 'cat', 'cow']);
 
   this.render(hbs`
@@ -173,5 +161,5 @@ test('it can handle an un-initalized array for syncing the selected elements', f
     this.$('.ui.dropdown div.text.item:eq(1)').trigger('click');
   });
 
-    assert.deepEqual(this.get('selectedElements'), ['cow', 'cat']);
+  assert.deepEqual(this.get('selectedElements'), ['cow', 'cat']);
 });
