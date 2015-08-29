@@ -13,6 +13,7 @@ export default Ember.Component.extend({
   debug: false,
   search: true,
   selecting: 'selected',
+  prompt: '--Select One--',
 
   configure(){
     const options = Ember.getProperties(this, 'allowAdditions', 'maxSelections', 'debug', 'multiple' );
@@ -34,16 +35,13 @@ export default Ember.Component.extend({
 
   actions: {
     updateSelection() {
-      const selectedElements = this.$('input[name="hiddenSelection"]').val().split(',');
-      if (selectedElements[0] ===  '-1'){
+      const selectedIndicies = this.$('input[name="hiddenSelection"]').val().split(',');
+      if (selectedIndicies[0] ===  '-1'){
         this.$().dropdown('clear');
         return;
       }
       const model = Ember.A(this.get('model'));
-      let answer = model.objectsAt(selectedElements);
-      if (!this.get('multiple')) {
-        answer = answer[0];
-      }
+      const answer = this.get('multiple') ? model.objectsAt(selectedIndicies) : model.objectAt(selectedIndicies[0]);
       this.set('selected', answer);
     }
   }
