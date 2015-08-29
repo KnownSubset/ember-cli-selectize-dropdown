@@ -1,6 +1,6 @@
 {
-  "name": "selectize-drop-down",
-  "version": "0.0.0",
+  "name": "selectize-dropdown",
+  "version": "0.0.1",
   "description": "The default blueprint for ember-cli addons.",
   "directories": {
     "doc": "doc",
@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "https://github.com/knownSubset/ember-cli-selectize-dropdown",
   "engines": {
     "node": ">= 0.10.0"
   },
@@ -38,9 +38,12 @@
     "ember-try": "0.0.6"
   },
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "drop-down",
+    "select"
   ],
   "dependencies": {
+    "ember-cli-htmlbars": "0.7.9",
     "ember-cli-babel": "^5.1.3"
   },
   "ember-addon": {
