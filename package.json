@@ -1,7 +1,7 @@
 {
-  "name": "selectize-dropdown",
+  "name": "ember-cli-selectize-dropdown",
   "version": "0.0.1",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Provides a feature rich select box replacement that you can supply custom styling.",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -40,7 +40,11 @@
   "keywords": [
     "ember-addon",
     "drop-down",
-    "select"
+    "select",
+    "ember",
+    "ember.js",
+    "semantic",
+    "semantic-ui"
   ],
   "dependencies": {
     "ember-cli-htmlbars": "0.7.9",
