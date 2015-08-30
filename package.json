@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-selectize-dropdown",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Provides a feature rich select box replacement that you can supply custom styling.",
   "directories": {
     "doc": "doc",
